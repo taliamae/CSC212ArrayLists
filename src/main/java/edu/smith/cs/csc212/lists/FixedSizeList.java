@@ -56,29 +56,39 @@ public class FixedSizeList<T> extends ListADT<T> {
 
 	@Override
 	public T getFront() {
-		throw new TODOErr();
+		return this.array.getIndex(0);
 	}
 
 	@Override
 	public T getBack() {
-		throw new TODOErr();
+		return this.array.getIndex(array.size());
 	}
 
 	@Override
 	public void addIndex(int index, T value) {
 		// slide to the right
-		throw new TODOErr();
+		if (fill < array.size()) {
+			fill ++;
+			for (int i=index; i < array.size(); i++) {
+				array.setIndex(i, array.getIndex(i-1));
+			}
+			array.setIndex(index, value);
+		} else {
+			throw new RanOutOfSpaceError();
+		}
 	}
 
 	@Override
 	public void addFront(T value) {
+		fill ++;
 		this.addIndex(0, value);
 	}
 
 	@Override
 	public void addBack(T value) {
+		fill ++;
 		if (fill < array.size()) {
-			array.setIndex(fill++, value);
+			array.setIndex(fill, value);
 		} else {
 			throw new RanOutOfSpaceError();
 		}
@@ -86,13 +96,18 @@ public class FixedSizeList<T> extends ListADT<T> {
 
 	@Override
 	public T removeIndex(int index) {
-		// slide to the left
+		//not working for some reason, changed i=0 to i=index
+		
+		for (int i=index; i < array.size() - 1; i++) {
+			array.setIndex(i, array.getIndex(i+1));
+		}
+		array.setIndex(array.size()-1, null);
 		throw new TODOErr();
 	}
 
 	@Override
 	public T removeBack() {
-		throw new TODOErr();
+		return removeIndex(array.size()-1);
 	}
 
 	@Override

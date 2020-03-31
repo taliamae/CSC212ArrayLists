@@ -2,6 +2,7 @@ package edu.smith.cs.csc212.lists;
 
 import me.jjfoley.adt.ArrayWrapper;
 import me.jjfoley.adt.ListADT;
+import me.jjfoley.adt.errors.BadIndexError;
 import me.jjfoley.adt.errors.TODOErr;
 
 /**
@@ -50,7 +51,12 @@ public class GrowableList<T> extends ListADT<T> {
 
 	@Override
 	public T removeIndex(int index) {
-		// slide to the left
+		//not working for some reason, changed i=0 to i=index
+		for (int i=index; i < array.size() - 1; i++) {
+			array.setIndex(i, array.getIndex(i+1));
+		}
+		array.setIndex(array.size()-1, null);
+		//throw new BadIndexError(index);
 		throw new TODOErr();
 	}
 
@@ -78,7 +84,14 @@ public class GrowableList<T> extends ListADT<T> {
 	@Override
 	public void addIndex(int index, T item) {
 		// slide to the right
-		throw new TODOErr();
+		if (this.fill < array.size()) {
+			for (int i=this.fill - 1; i < index; i--) {
+				array.setIndex(i, array.getIndex(i + 1));
+				fill++;
+			}
+		} else {
+			this.resizeArray();
+		}
 	}
 
 	@Override
