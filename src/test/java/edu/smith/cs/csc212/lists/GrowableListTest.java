@@ -140,6 +140,7 @@ public class GrowableListTest {
 				throw new AssertionError("Something wrong with isEmpty, I think.");
 			}
 		}
+		System.out.println("AddFrontFull: " + items2);
 		for (int i = 0; i < N; i++) {
 			Assert.assertEquals((i + 1) * 3, (int) items2.getIndex(i));
 		}
@@ -178,10 +179,11 @@ public class GrowableListTest {
 				throw new AssertionError("Something wrong with isEmpty, I think...?");
 			}
 		}
-		
+		System.out.println("AddIndexMany: " + items2);
 		for (int i=0; i<N; i++) {
 			Assert.assertEquals((i+1)*3, (int) items2.getIndex(i)); 
 		}
+		
 	}
 	
 	@Test

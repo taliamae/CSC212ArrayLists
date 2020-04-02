@@ -38,6 +38,7 @@ public class ChunkyArrayList<T> extends ListADT<T> {
 
 	@Override
 	public T removeFront() {
+		
 		throw new TODOErr();
 	}
 
